@@ -1,12 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-import NavBar from '../src/Components/NavBar.js';
+import { useState } from 'react';
+import NavBar from './components/NavBar'
+import "bootstrap/dist/css/bootstrap.css";
+import ItemListContainer from './components/ItemListContainer';
+
 
 function App() {
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar/>
+        <NavBar className="NavBar"/>
+        <ItemListContainer/>
+        
       </header>
     </div>
   );

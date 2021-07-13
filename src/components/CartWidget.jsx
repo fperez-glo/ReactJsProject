@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../images/cartLogo.svg'
 
-function CartWidget() {
+const CartWidget = () => {
     return (
         <div className="cartContainer">
             <a class="navbar-brand" href="#">

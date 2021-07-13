@@ -10,11 +10,13 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar className="NavBar"/>
       <header className="App-header">
-        <NavBar className="NavBar"/>
-        <ItemListContainer/>
-        
+      
       </header>
+      <body className="App-body">
+        <ItemListContainer/>
+      </body>
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import React from "react";
+import styled from 'styled-components';
 import CartWidget from "./CartWidget";
 import pageLogo from "../images/logo.svg";
 import searchButtonIco from "../images/searchIcon.svg";
 
 
-function NavBar() {
+
+const NavBar = () => {
   return (
     <div>
       <nav class="navbar navbar-light bg-light">
@@ -44,5 +46,12 @@ function NavBar() {
     </div>
   );
 }
+
+// TODO: No se si esto lo voy a usar.
+// const Nav = styled.nav`
+// background: red;
+// height: 80px;
+// display: flex;
+// justify-content:center;`
 
 export default NavBar;

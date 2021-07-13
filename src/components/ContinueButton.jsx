@@ -1,7 +1,6 @@
 import {React} from 'react'
 
-
-function ContinueButton() {
+const ContinueButton = () => {
     return (
         <button class="btn btn-primary">Continuar</button>
     )

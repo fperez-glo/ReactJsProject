@@ -2,7 +2,10 @@ import React from 'react'
 
 const ItemCountCard = (
     {
-     cantidad=1,
+     counter=1,
+     price=99999,
+     srcImg,
+     prodTitle='prodTitle',
      onSubmitAdd,
      onSubmitSubtract,
      onSubmitAddToCart,
@@ -19,6 +22,7 @@ const ItemCountCard = (
             width: '17rem',
             //backgroundColor:'blue',
             borderRadius:5,
+            color:'black'
             //padding:5,
         },
         buttonCounterStyle: {
@@ -44,11 +48,13 @@ const ItemCountCard = (
     return (
         <>
             <div class="card" style={styles.card}>
-                <img src="https://www.fullh4rd.com.ar/img/productos/Pics_Prod/micro-intel-core-i7-8700k-0.jpg" class="card-img-top" alt="..."/>
+                <img src={srcImg} class="card-img-top" alt="..."/>
                 <div class="card-body" style={styles.cardBody}>
+                    <h5 class="card-title">{prodTitle}</h5>
+                    <h5 class="card-title">${price}</h5>
                     <div class="buttonCounter" style={styles.buttonCounterStyle }>
                         <button class="btn col-2" onClick={onSubmitSubtract}>-</button>
-                        <text>{cantidad}</text>
+                        <text>{counter}</text>
                         <button class="btn col-2" onClick={onSubmitAdd}>+</button>
                     </div>
                     <a href="#" onClick={onSubmitAddToCart} style={styles.addCartButton} class="btn btn-outline-primary" >Añadir al carrito</a>

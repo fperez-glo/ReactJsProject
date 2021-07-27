@@ -1,8 +1,8 @@
-import React from "react";
-import styled from 'styled-components';
 import CartWidget from "./CartWidget";
 import pageLogo from "../images/logo.svg";
 import searchButtonIco from "../images/searchIcon.svg";
+import { Link } from "react-router-dom";
+import { Button, Card, NavDropdown } from "react-bootstrap";
 
 
 
@@ -27,12 +27,15 @@ const NavBar = () => {
           </form>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              Home
+              <Link to="/">Home</Link>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              Productos
+              <NavDropdown title="Catalogo" id="basic-nav-dropdown">
+               <Link to="/category/procesadores"><NavDropdown.Item href="#action/3.1">processors</NavDropdown.Item></Link>
+               <Link to="/category/videoCards"><NavDropdown.Item href="#action/3.2">videoCards</NavDropdown.Item></Link>
+              </NavDropdown>
             </a>
           </li>
           <li class="nav-item">

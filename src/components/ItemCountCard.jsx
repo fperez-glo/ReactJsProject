@@ -1,70 +1,67 @@
-import React from 'react'
+import { useState, useEffect } from "react";
+import { Button, Card } from "react-bootstrap";
+import ItemCounter from "./ItemCounter";
+import { Link, useParams } from "react-router-dom";
 
-const ItemCountCard = (
-    {
-     counter=1,
-     price=99999,
-     srcImg,
-     prodTitle='prodTitle',
-     onSubmitAdd,
-     onSubmitSubtract,
-     onSubmitAddToCart,
+const ItemCountCard = ({
+  price = 99999,
+  srcImg,
+  prodTitle = "prodTitle",
+  stock,
+}) => {
+  const [itemQuantity, setItemQuantity] = useState(1);
+  const { prodId } = useParams();
+  //Styles propios del componente.
+  const styles = {
+    card: {
+      width: "17rem",
+    },
+    cardBody: {
+      width: "17rem",
+      //backgroundColor:'blue',
+      borderRadius: 5,
+      color: "black",
+      //padding:5,
+    },
+  };
+
+  const handleAdd = () => {
+    console.log("Sumar item");
+    setItemQuantity(itemQuantity + 1);
+  };
+
+  const handleSubtract = () => {
+    console.log("Restar item");
+    if (itemQuantity > 1) {
+      setItemQuantity(itemQuantity - 1);
     }
-    ) => {
-    
-    //Styles propios del componente.
-    const styles = ({
-        card: {
-            width: '17rem',
-            
-        },
-        cardBody: {
-            width: '17rem',
-            //backgroundColor:'blue',
-            borderRadius:5,
-            color:'black'
-            //padding:5,
-        },
-        buttonCounterStyle: {
-            color:'black',
-            width: '15rem',
-            display:'flex',
-            flexDirection:'row',
-            justifyContent:'space-between',
-            alignItems:'center',
-            marginBottom:4,
-            //backgroundColor:'red',
-        },
-        addCartButton: {
-            width: '15rem',
-            //backgroundColor:'green',
-        },
+  };
 
+  const handleAddToCart = () => {
+    console.log("Se agrego el producto:");
+    setItemQuantity(1);
+  };
 
-    })
-    
-        
-    // })
-    return (
-        <>
-            <div class="card" style={styles.card}>
-                <img src={srcImg} class="card-img-top" alt="..."/>
-                <div class="card-body" style={styles.cardBody}>
-                    <h5 class="card-title">{prodTitle}</h5>
-                    <h5 class="card-title">${price}</h5>
-                    <div class="buttonCounter" style={styles.buttonCounterStyle }>
-                        <button class="btn col-2" onClick={onSubmitSubtract}>-</button>
-                        <text>{counter}</text>
-                        <button class="btn col-2" onClick={onSubmitAdd}>+</button>
-                    </div>
-                    <a href="#" onClick={onSubmitAddToCart} style={styles.addCartButton} class="btn btn-outline-primary" >Añadir al carrito</a>
-                </div>
-            </div>
-        </>
-    )
+  // })
+  return (
+    <>
+      <Card style={styles.card}>
+        <Link to="/detail/:prodId">
+          <Card.Img src={srcImg} variant="top" />
+        </Link>
+        <Card.Body style={styles.cardBody}>
+          <Card.Title>{prodTitle}</Card.Title>
+          <Card.Title>${price}</Card.Title>
+          <ItemCounter
+            onSubmitAdd={() => handleAdd()}
+            onSubmitSubtract={() => handleSubtract()}
+            onSubmitAddToCart={() => handleAddToCart()}
+            counter={itemQuantity}
+          />
+        </Card.Body>
+      </Card>
+    </>
+  );
+};
 
-    
-    
-}
-
-export default ItemCountCard
+export default ItemCountCard;

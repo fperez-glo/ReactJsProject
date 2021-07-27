@@ -1,31 +1,44 @@
-
 import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.css";
-import ItemListContainer from "./components/ItemListContainer";
 import "./App.css";
-
-
+import ItemListContainer from "./components/ItemListContainer";
+import ItemDetailContainer from "./components/ItemDetailContainer"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
-  const styles = ({
+  const styles = {
     body: {
-        backgroundColor:'green',
-        width:'100%',
-        height:'300px',
+      backgroundColor: "green",
+      width: "100%",
+      height: "300px",
     },
-  })
+  };
+
   return (
-    <div className="App">
+    <Router>
       <NavBar className="NavBar" />
-      <header className="App-header"></header>
-      <body className="App-body">
-        <ItemListContainer
-         className='ItemListContainer'
-         styles={styles.body}
-        />
-      </body>
-    </div>
+      <div className="App">
+        <Switch>
+        <body className="App-body">
+          <Route exact path="/">
+            <ItemListContainer/>
+          </Route>
+          <Route exact path="/detail/:prodId">
+            <ItemDetailContainer/>
+          </Route>
+          <Route exact path="/category/:categoryId">
+            <ItemListContainer
+              className="ItemListContainer"
+              styles={styles.body}
+            />
+          </Route>
+          </body>
+        </Switch>
+        
+        
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

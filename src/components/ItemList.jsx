@@ -3,39 +3,30 @@ import ItemCountCard from "./ItemCountCard";
 import productJson from "../soyTuMarket.json";
 
 const ItemList = () => {
-  const [itemQuantity, setItemQuantity] = useState(1);
+  const [items, SetItems] = useState([]);
 
-  const handleAdd = () => {
-    console.log("Sumar item");
-    setItemQuantity(itemQuantity + 1);
-  };
+  useEffect(()=>{
+    console.log('useEffect');
+    
+  },[])
 
-  const handleSubtract = () => {
-    console.log("Restar item");
-    if (itemQuantity > 1) {
-      setItemQuantity(itemQuantity - 1);
-    }
-  };
-
-  const handleAddToCart = (prodId, itemQuantity) => {
-    console.log("Se agrego el producto:", prodId);
-    console.log("productJson:", productJson[0]);
-    setItemQuantity(1);
-  };
+  const styles = {
+    cards: {
+      display: "flex",
+      flexDirection: "row",
+    },
+  }
 
   return (
     <>
       {productJson.map((item) => (
         <ItemCountCard
-          onSubmitAdd={() => handleAdd()}
-          onSubmitSubtract={() => handleSubtract()}
-          counter={itemQuantity}
           srcImg={item.srcImg}
           prodTitle={item.prodTitle}
           key={item.prodId}
           stock={item.stock}
           price={item.price}
-          onSubmitAddToCart={() => handleAddToCart(item.prodId, itemQuantity)}
+          
         />
       ))}
     </>

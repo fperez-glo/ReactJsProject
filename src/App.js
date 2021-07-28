@@ -1,9 +1,10 @@
 import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import ItemListContainer from "./components/ItemListContainer";
+import ItemCartContainer from "./components/ItemCartContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CartWidget from "./components/CartWidget";
 
 const App = () => {
   const styles = {
@@ -19,19 +20,25 @@ const App = () => {
       <NavBar className="NavBar" />
       <div className="App">
         <Switch>
-        <body className="App-body">
-          <Route exact path="/">
-            <ItemListContainer/>
-          </Route>
-          <Route exact path="/detail/:prodId">
-            <ItemDetailContainer/>
-          </Route>
-          <Route exact path="/category/:categoryId">
-            <ItemListContainer
-              className="ItemListContainer"
-              styles={styles.body}
-            />
-          </Route>
+          <body className="App-body">
+            <Route exact path="/">
+              <ItemCartContainer/>
+            </Route>
+            {/* <Route exact path="/detail/:prodId">
+              <ItemDetailContainer/>
+            </Route> */}
+            <Route exact path="/category/:categoryId">
+              <ItemCartContainer
+                className="ItemCartContainer"
+                styles={styles.body}
+              />
+            </Route>
+            <Route exact path="/detail/:prodId">
+              <ItemDetailContainer/>
+            </Route>
+            <Route exact path="/cart">
+              <CartWidget/>
+            </Route>
           </body>
         </Switch>
         

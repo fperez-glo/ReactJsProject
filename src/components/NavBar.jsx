@@ -43,7 +43,7 @@ const NavBar = () => {
               Sucursales
             </a>
           </li>
-          <CartWidget />
+          <Link to="/cart"><CartWidget /></Link>
         </div>
       </nav>
     </div>

@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import ItemCountCard from "./ItemCountCard";
-import productJson from "../soyTuMarket.json";
 
-const ItemList = () => {
-  const [items, SetItems] = useState([]);
 
-  useEffect(()=>{
-    console.log('useEffect');
-    
-  },[])
+const ItemList = (
+  items
+) => {
+
 
   const styles = {
     cards: {
@@ -19,13 +16,13 @@ const ItemList = () => {
 
   return (
     <>
-      {productJson.map((item) => (
+      {items.map((el) => (
         <ItemCountCard
-          srcImg={item.srcImg}
-          prodTitle={item.prodTitle}
-          key={item.prodId}
-          stock={item.stock}
-          price={item.price}
+          srcImg={el.srcImg}
+          prodTitle={el.prodTitle}
+          key={el.prodId}
+          stock={el.stock}
+          price={el.price}
           
         />
       ))}

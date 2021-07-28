@@ -4,6 +4,9 @@ import ItemDetail from "./ItemDetail";
 import productJson from "../soyTuMarket.json";
 
 const ItemDetailContainer = () => {
+
+  const { prodId } = useParams();
+  console.log('!!! prodId:', prodId);
   return (
     <>
       <ItemDetail 

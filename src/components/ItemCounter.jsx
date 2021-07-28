@@ -1,12 +1,17 @@
-import React from "react";
+import { useState, useEffect, View } from "react";
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 
 const ItemCounter = ({
-  counter = 1,
-  onSubmitAdd,
-  onSubmitSubtract,
-  onSubmitAddToCart
+  //counter = 1,
+  //onSubmitAdd,
+  //onSubmitSubtract,
+  //onSubmitAddToCart
 }) => {
+  const [value, setValue] = useState(1);
+  const [inCart, setInCart] = useState(false);
+
   const styles = {
     buttonCounterStyle: {
       color: "black",
@@ -24,20 +29,45 @@ const ItemCounter = ({
     },
   };
 
+  const add = () => {
+    setValue(value +1);
+  };
+
+  const subtract = () => {
+    if (value > 1) {
+      setValue(value -1);
+    }
+  };
+
+  const addToCart = () => {
+    setInCart(true);
+  }
+
   return (
     <>
-      <div style={styles.buttonCounterStyle}>
-        <Button variant="primary" onClick={onSubmitSubtract}>
+      <Card style={styles.buttonCounterStyle}>
+        <Button variant="primary" onClick={() => subtract()}>
           -
         </Button>
-        <Card.Text>{counter}</Card.Text>
-        <Button variant="primary" onClick={onSubmitAdd}>
+        <Card.Text>{value}</Card.Text>
+        <Button variant="primary" onClick={() => add()}>
           +
         </Button>
-      </div>
-      <Button onClick={onSubmitAddToCart} style={styles.addCartButton}>
-        Añadir al carrito
-      </Button>
+        </Card>
+        <Button onClick={() => addToCart()} style={styles.addCartButton}>
+          Añadir al carrito
+        </Button>
+        
+      
+
+      { inCart && (
+      <Link to="/cart">
+        <Button style={styles.addCartButton}>
+          Finalizar Compra
+        </Button>
+      </Link>
+      ) }
+      
     </>
   );
 };

@@ -11,15 +11,19 @@ const ItemDetail = ({
 }) => {
   const styles = {
     card: {
-      width: "17rem",
+      width: "30rem",
       display:"flex",
       flexDirection: "row",
+      //backgroundColor:"blue",
+      justifyContent: "flex-start",
+      alignItems: "flex-start",
+
     },
     detail: {
-      color: "black",
+      color: "white",
       width: "15rem",
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "column",
       justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 4,
@@ -31,13 +35,13 @@ const ItemDetail = ({
     <>
       <Card style={styles.card}>
         <Card.Img src={srcImg} variant="top"></Card.Img>
-        <Card.Body>
+        <Card.Body style={styles.detail}>
+          <Card.Text>
+            {description}
+          </Card.Text>
           <Card.Title>{prodTitle}</Card.Title>
           <Card.Title>${price}</Card.Title>
           <ItemCounter/>
-          <Card.Text>
-            {description}
-           </Card.Text>
         </Card.Body>
       </Card>
     </>

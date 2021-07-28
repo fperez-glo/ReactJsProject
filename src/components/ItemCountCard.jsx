@@ -9,8 +9,9 @@ const ItemCountCard = ({
   prodTitle = "prodTitle",
   stock,
 }) => {
-  const [itemQuantity, setItemQuantity] = useState(1);
+
   const { prodId } = useParams();
+
   //Styles propios del componente.
   const styles = {
     card: {
@@ -25,24 +26,7 @@ const ItemCountCard = ({
     },
   };
 
-  const handleAdd = () => {
-    console.log("Sumar item");
-    setItemQuantity(itemQuantity + 1);
-  };
 
-  const handleSubtract = () => {
-    console.log("Restar item");
-    if (itemQuantity > 1) {
-      setItemQuantity(itemQuantity - 1);
-    }
-  };
-
-  const handleAddToCart = () => {
-    console.log("Se agrego el producto:");
-    setItemQuantity(1);
-  };
-
-  // })
   return (
     <>
       <Card style={styles.card}>
@@ -52,12 +36,6 @@ const ItemCountCard = ({
         <Card.Body style={styles.cardBody}>
           <Card.Title>{prodTitle}</Card.Title>
           <Card.Title>${price}</Card.Title>
-          <ItemCounter
-            onSubmitAdd={() => handleAdd()}
-            onSubmitSubtract={() => handleSubtract()}
-            onSubmitAddToCart={() => handleAddToCart()}
-            counter={itemQuantity}
-          />
         </Card.Body>
       </Card>
     </>

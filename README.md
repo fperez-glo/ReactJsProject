@@ -39,6 +39,11 @@ $ npm run build
 $ npm run test
 ```
 
+## Build with 🛠️
+
+* [Bootstrap](https://react-bootstrap.github.io/) - Styles Library.
+* [React Router](https://reactrouter.com/web/guides/quick-start) - React Navigation Component.
+
 ## Support
 
 React is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing developers. If you'd like to join them, please [read more here](https://reactjs.org/community/support.html).

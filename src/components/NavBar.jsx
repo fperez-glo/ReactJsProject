@@ -12,7 +12,7 @@ const NavBar = () => {
       <nav class="navbar navbar-light bg-light">
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src={pageLogo} alt="" width="45" height="35" />
+          <Link to="/"><img src={pageLogo} alt="" width="45" height="35" /></Link>
           </a>
           <form class="d-flex">
             <input
@@ -33,8 +33,8 @@ const NavBar = () => {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <NavDropdown title="Catalogo" id="basic-nav-dropdown">
-               <Link to="/category/procesadores"><NavDropdown.Item href="#action/3.1">processors</NavDropdown.Item></Link>
-               <Link to="/category/videoCards"><NavDropdown.Item href="#action/3.2">videoCards</NavDropdown.Item></Link>
+               <Link to="/category/procesadores"><NavDropdown.Item href="#action/3.1">Procesadores</NavDropdown.Item></Link>
+               <Link to="/category/videoCards"><NavDropdown.Item href="#action/3.2">Tarjetas de Video</NavDropdown.Item></Link>
               </NavDropdown>
             </a>
           </li>

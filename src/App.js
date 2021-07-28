@@ -36,13 +36,8 @@ const App = () => {
             <Route exact path="/detail/:prodId">
               <ItemDetailContainer/>
             </Route>
-            <Route exact path="/cart">
-              <CartWidget/>
-            </Route>
           </body>
         </Switch>
-        
-        
       </div>
     </Router>
   );

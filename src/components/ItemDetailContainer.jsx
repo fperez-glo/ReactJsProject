@@ -4,18 +4,32 @@ import ItemDetail from "./ItemDetail";
 import productJson from "../soyTuMarket.json";
 
 const ItemDetailContainer = () => {
-
+  const [ items, setItems ] = useState([]);
   const { prodId } = useParams();
-  console.log('!!! prodId:', prodId);
+
+  useEffect(()=>{
+    if ( prodId ) {
+      setItems(productJson.filter(it => it.prodId===prodId));
+    } else
+    {
+      setItems(productJson);
+    }
+  },[prodId])
+
+
   return (
     <>
-      <ItemDetail 
-       prodTitle={productJson[0].prodTitle}
-       price={productJson[0].price}
-       stock={productJson[0].stock}
-       srcImg={productJson[0].srcImg}
-       description={productJson[0].description}
-      />
+      {items.map((el) => (
+        <ItemDetail 
+        key={el.prodId}
+        prodTitle={el.prodTitle}
+        price={el.price}
+        stock={el.stock}
+        srcImg={el.srcImg}
+        description={el.description}
+        />
+      ))}
+      
     </>
   );
 };

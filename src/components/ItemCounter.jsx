@@ -14,14 +14,14 @@ const ItemCounter = ({
 
   const styles = {
     buttonCounterStyle: {
-      color: "black",
+      color: "white",
       width: "15rem",
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 4,
-      //backgroundColor:'red',
+      backgroundColor:'#282c34',
     },
     addCartButton: {
       width: "15rem",

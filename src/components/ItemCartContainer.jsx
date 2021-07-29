@@ -27,6 +27,7 @@ const ItemCartContainer = () => {
           srcImg={el.srcImg}
           prodTitle={el.prodTitle}
           key={el.prodId}
+          prodId={el.prodId}
           stock={el.stock}
           price={el.price}
         />

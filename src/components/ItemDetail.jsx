@@ -14,7 +14,7 @@ const ItemDetail = ({
       width: "30rem",
       display:"flex",
       flexDirection: "row",
-      //backgroundColor:"blue",
+      backgroundColor:"#282c34",
       justifyContent: "flex-start",
       alignItems: "flex-start",
 

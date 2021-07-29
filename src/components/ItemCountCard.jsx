@@ -7,11 +7,12 @@ const ItemCountCard = ({
   price = 99999,
   srcImg,
   prodTitle = "prodTitle",
+  prodId,
   stock,
 }) => {
 
-  const { prodId } = useParams();
-
+  const route = `/detail/${prodId}`
+  
   //Styles propios del componente.
   const styles = {
     card: {
@@ -30,7 +31,7 @@ const ItemCountCard = ({
   return (
     <>
       <Card style={styles.card}>
-        <Link to="/detail/:prodId">
+        <Link to={route}>
           <Card.Img src={srcImg} variant="top" />
         </Link>
         <Card.Body style={styles.cardBody}>

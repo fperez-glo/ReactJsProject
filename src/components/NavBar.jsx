@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import CartWidget from "./CartWidget";
 import pageLogo from "../images/logo.svg";
 import searchButtonIco from "../images/searchIcon.svg";
@@ -7,6 +8,8 @@ import { Button, Card, NavDropdown } from "react-bootstrap";
 
 
 const NavBar = () => {
+  
+
   return (
     <div>
       <nav class="navbar navbar-light bg-light">
@@ -43,18 +46,13 @@ const NavBar = () => {
               Sucursales
             </a>
           </li>
-          <Link to="/cart"><CartWidget /></Link>
+          <Link to="/cart">
+            <CartWidget/>
+          </Link>
         </div>
       </nav>
     </div>
   );
 }
-
-// TODO: No se si esto lo voy a usar.
-// const Nav = styled.nav`
-// background: red;
-// height: 80px;
-// display: flex;
-// justify-content:center;`
 
 export default NavBar;

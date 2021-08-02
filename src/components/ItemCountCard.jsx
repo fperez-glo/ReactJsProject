@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import ItemCounter from "./ItemCounter";
 import { Link, useParams } from "react-router-dom";
+import { useContextsCart } from "../context/ContextsCart";
 
 const ItemCountCard = ({
   price = 99999,
@@ -12,6 +13,7 @@ const ItemCountCard = ({
 }) => {
 
   const route = `/detail/${prodId}`
+  const { setProdId } = useContextsCart();
   
   //Styles propios del componente.
   const styles = {
@@ -32,7 +34,7 @@ const ItemCountCard = ({
     <>
       <Card style={styles.card}>
         <Link to={route}>
-          <Card.Img src={srcImg} variant="top" />
+          <Card.Img src={srcImg} variant="top" onClick={() => setProdId(prodId)} />
         </Link>
         <Card.Body style={styles.cardBody}>
           <Card.Title>{prodTitle}</Card.Title>

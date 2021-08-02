@@ -17,7 +17,8 @@ const ItemDetail = ({
       backgroundColor:"#282c34",
       justifyContent: "flex-start",
       alignItems: "flex-start",
-
+      borderStyle: "none",
+      //backgroundColor:'red',
     },
     detail: {
       color: "white",

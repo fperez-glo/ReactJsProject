@@ -41,9 +41,11 @@ const ItemCounter = ({}) => {
     }
   };
 
+
   const addToCart = () => {
     setInCart(true);
 
+    //FIXME: EL INSERT DE LOS ITEMS AL ARRAY DE OBJETOS "cartItems" NO LOS ESTARIA METIENDO BIEN YA QUE LOS TRANSFORMA COMO A "NUMBERS".
     setCartItems([
       ...cartItems,
       cartItems.push(prodSet)

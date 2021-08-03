@@ -32,11 +32,12 @@ const ItemCartContainer = () => {
  
   return (
     <>
-      {loading && 
+      {/*FIXME: EL LOADING NO ESTARIA FUNCIONANDO...*/}
+      {loading &&  
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
           </Spinner> }
-          
+
       {!loading && 
       items.map((el) => (
         <ItemCountCard

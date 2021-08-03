@@ -13,7 +13,7 @@ const ItemCountCard = ({
 }) => {
 
   const route = `/detail/${prodId}`
-  const { setProdId } = useContextsCart();
+  const { setProd } = useContextsCart();
   
   //Styles propios del componente.
   const styles = {
@@ -29,12 +29,20 @@ const ItemCountCard = ({
     },
   };
 
+  const setProdPrice= () => {
+    setProd({
+      prodId: prodId,
+      price: price,
+      quantity: 0,
+    } )
+  };
+
 
   return (
     <>
       <Card style={styles.card}>
         <Link to={route}>
-          <Card.Img src={srcImg} variant="top" onClick={() => setProdId(prodId)} />
+          <Card.Img src={srcImg} variant="top" onClick={() => setProdPrice()} />
         </Link>
         <Card.Body style={styles.cardBody}>
           <Card.Title>{prodTitle}</Card.Title>

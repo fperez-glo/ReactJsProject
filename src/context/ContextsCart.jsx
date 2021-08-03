@@ -6,8 +6,8 @@ const ContextsCart = createContext();
 export const useContextsCart = () => useContext(ContextsCart);
 
 const ContextsCartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(['azucar','asd','asd','asdasd']);
-  const [prodIdSet, setProdId] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+  const [prodSet, setProd] = useState({});
 
   return (
     <>
@@ -15,8 +15,8 @@ const ContextsCartProvider = ({ children }) => {
         value={{
           cartItems,
           setCartItems,
-          prodIdSet,
-          setProdId,
+          prodSet,
+          setProd,
         }}
       >
         {children}

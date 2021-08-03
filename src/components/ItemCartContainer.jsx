@@ -4,25 +4,35 @@ import ItemCountCard from "./ItemCountCard";
 import { useParams } from "react-router-dom";
 import productJson from "../soyTuMarket.json";
 
+import Spinner from 'react-bootstrap/Spinner'
+
 const ItemCartContainer = () => {
   
   const { categoryId } = useParams();
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   
 
   useEffect(()=>{
-    if ( categoryId ) {
-      setItems(productJson.filter(it => it.categoryId===categoryId));
+    fetchItems();
+  },[categoryId])
+
+  const fetchItems = (categoryId) => {
+    if ( categoryId ) { 
+      setTimeout(()=>{setItems(productJson.filter(it => it.categoryId===categoryId))},1000)
+      setLoading(false);
+      //setItems(productJson.filter(it => it.categoryId===categoryId));
     } else
     {
-      setItems(productJson);
-    }
-  },[categoryId])
+      setTimeout(()=>{setItems(productJson)},1000)
+      setLoading(false);
+    };
+  };
 
  
   return (
     <>
-      {items.map((el) => (
+      {!loading ? items.map((el) => (
         <ItemCountCard
           srcImg={el.srcImg}
           prodTitle={el.prodTitle}
@@ -31,7 +41,9 @@ const ItemCartContainer = () => {
           stock={el.stock}
           price={el.price}
         />
-      ))}
+      )) : <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner> }
     </>
   );
 };

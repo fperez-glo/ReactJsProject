@@ -5,9 +5,9 @@ import { useContextsCart } from "../context/ContextsCart";
 //import CartContext from "../context/CartContext";
 
 const ItemCounter = ({}) => {
-  const [value, setValue] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(false);
-  const { cartItems, setCartItems, prodIdSet} = useContextsCart();
+  const { cartItems, setCartItems, prodSet} = useContextsCart();
 
   const styles = {
     Card: {
@@ -32,31 +32,36 @@ const ItemCounter = ({}) => {
   };
 
   const add = () => {
-    setValue(value + 1);
+    setQuantity(quantity + 1);
   };
 
   const subtract = () => {
-    if (value > 1) {
-      setValue(value - 1);
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
   };
 
   const addToCart = () => {
     setInCart(true);
-    setCartItems(cartItems.push(prodIdSet));
-    console.log('prodIdSet:',prodIdSet);
+
+    setCartItems([
+      ...cartItems,
+      cartItems.push(prodSet)
+    ]);
+    
     console.log('cartItems:',cartItems);
   };
 
   return (
     <>
+      {console.log('cartItems en render!!!!!',cartItems)}
       {!inCart &&(
       <Card style={styles.Card}>
         <Card.Body style={styles.buttonCounterStyle}>
           <Button variant="primary" onClick={() => subtract()}>
             -
           </Button>
-          <Card.Text>{value}</Card.Text>
+          <Card.Text>{quantity}</Card.Text>
           <Button variant="primary" onClick={() => add()}>
             +
           </Button>
@@ -68,7 +73,7 @@ const ItemCounter = ({}) => {
       )}
       {inCart && (
         <Link to="/cart">
-          <Button style={styles.addCartButton}>Finalizar Compra</Button>
+          <Button variant="success" style={styles.addCartButton}>Finalizar Compra</Button>
         </Link>
       )}
     </>

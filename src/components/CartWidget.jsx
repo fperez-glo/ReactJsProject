@@ -8,11 +8,11 @@ const CartWidget = ({
 
   const { cartItems } = useContextsCart();
 
-  console.log('cartItems:',cartItems);
+  //console.log('cartItems:',cartItems);
   return (
     <div className="cartContainer">
         <img src={logo} alt="" width="45" height="35" />
-      {/* {<p>{cartItems.length}</p> */}
+        <p>{cartItems.length}</p> 
     </div>
   );
 };

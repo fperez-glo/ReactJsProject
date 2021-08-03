@@ -32,7 +32,13 @@ const ItemCartContainer = () => {
  
   return (
     <>
-      {!loading ? items.map((el) => (
+      {loading && 
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner> }
+          
+      {!loading && 
+      items.map((el) => (
         <ItemCountCard
           srcImg={el.srcImg}
           prodTitle={el.prodTitle}
@@ -41,9 +47,7 @@ const ItemCartContainer = () => {
           stock={el.stock}
           price={el.price}
         />
-      )) : <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner> }
+      ))}
     </>
   );
 };

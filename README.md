@@ -43,6 +43,7 @@ $ npm run test
 
 * [Bootstrap](https://react-bootstrap.github.io/) - Styles Library.
 * [React Router](https://reactrouter.com/web/guides/quick-start) - React Navigation Component.
+* [SweetAlerts](https://sweetalert2.github.io/) - Sweet Alert.
 
 ## Support
 

@@ -42,8 +42,11 @@ $ npm run test
 ## Build with 🛠️
 
 * [Bootstrap](https://react-bootstrap.github.io/) - Styles Library.
-* [React Router](https://reactrouter.com/web/guides/quick-start) - React Navigation Component.
+* [ReactRouter](https://reactrouter.com/web/guides/quick-start) - React Navigation Component.
+* [MaterialUI](https://material-ui.com/es/getting-started/installation/) - Material UI Desing.
 * [SweetAlerts](https://sweetalert2.github.io/) - Sweet Alert.
+
+
 
 ## Support
 

@@ -2,12 +2,14 @@ import { useState, useEffect, View } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useContextsCart } from "../context/ContextsCart";
+import showAlert from "./Alerts/AlertHelper"
+import es from "../idiom/es"
 //import CartContext from "../context/CartContext";
 
 const ItemCounter = ({}) => {
   const [quantity, setQuantity] = useState(1);
   const [inCart, setInCart] = useState(false);
-  const { cartItems, setCartItems, prodSet} = useContextsCart();
+  const { cartItems, setCartItems, prodSet } = useContextsCart();
 
   const styles = {
     Card: {
@@ -23,7 +25,6 @@ const ItemCounter = ({}) => {
       justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 4,
-      
     },
     addCartButton: {
       width: "15rem",
@@ -41,44 +42,47 @@ const ItemCounter = ({}) => {
     }
   };
 
-
   const addToCart = () => {
-    setInCart(true);
-    console.log('esta en el carrito?:',cartItems.includes(prodSet));
-    if (cartItems.includes(prodSet)){
-      console.log('El producto ya se encuentra en el carrito.');
-    }else {
-      setCartItems([
-        ...cartItems,
-        prodSet
-      ]);
-    };
     
-    
+    //Agrego la cantidad elegida al objeto prodSet.
+    prodSet.quantity = quantity;
+
+    const findItem = cartItems.find((item) => item.prodId === prodSet.prodId);
+    //Valido si el item que quiero ingresar al carro ya existe.
+    if (!findItem) {
+      setCartItems([...cartItems, prodSet]);
+      showAlert.success(es.productSuccess)
+      setInCart(true);
+    } else {
+      showAlert.info(es.productInCart)
+      return;
+    }
   };
 
   return (
     <>
       {/*console.log('cartItems en render!!!!!',cartItems)*/}
-      {!inCart &&(
-      <Card style={styles.Card}>
-        <Card.Body style={styles.buttonCounterStyle}>
-          <Button variant="primary" onClick={() => subtract()}>
-            -
+      {!inCart && (
+        <Card style={styles.Card}>
+          <Card.Body style={styles.buttonCounterStyle}>
+            <Button variant="primary" onClick={() => subtract()}>
+              -
+            </Button>
+            <Card.Text>{quantity}</Card.Text>
+            <Button variant="primary" onClick={() => add()}>
+              +
+            </Button>
+          </Card.Body>
+          <Button onClick={() => addToCart()} style={styles.addCartButton}>
+            Añadir al carrito
           </Button>
-          <Card.Text>{quantity}</Card.Text>
-          <Button variant="primary" onClick={() => add()}>
-            +
-          </Button>
-        </Card.Body>
-        <Button onClick={() => addToCart()} style={styles.addCartButton}>
-          Añadir al carrito
-        </Button>
-      </Card>
+        </Card>
       )}
       {inCart && (
         <Link to="/cart">
-          <Button variant="success" style={styles.addCartButton}>Finalizar Compra</Button>
+          <Button variant="success" style={styles.addCartButton}>
+            Finalizar Compra
+          </Button>
         </Link>
       )}
     </>

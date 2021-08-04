@@ -33,7 +33,6 @@ const ItemCountCard = ({
     setProd({
       prodId: prodId,
       price: price,
-      quantity: 0,
     } )
   };
 

@@ -27,6 +27,7 @@ const ItemCountCard = ({
       color: "black",
       //padding:5,
     },
+    
   };
 
   const setProdPrice= () => {

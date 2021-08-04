@@ -1,7 +1,7 @@
 import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import ItemCartContainer from "./components/ItemCartContainer";
+import ItemCardContainer from "./components/ItemCardContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CartWidget from "./components/CartWidget";
@@ -24,11 +24,11 @@ const App = () => {
           <Switch>
             <body className="App-body">
               <Route exact path="/">
-                <ItemCartContainer />
+                <ItemCardContainer />
               </Route>
               <Route exact path="/category/:categoryId">
-                <ItemCartContainer
-                  className="ItemCartContainer"
+                <ItemCardContainer
+                  className="ItemCardContainer"
                   styles={styles.body}
                 />
               </Route>

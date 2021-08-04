@@ -1,18 +1,24 @@
 import React from "react";
 import logo from "../images/cartLogo.svg";
-import { useContextsCart } from "../context/ContextsCart"
+import { useContextsCart } from "../context/ContextsCart";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import Badge from '@material-ui/core/Badge';
 
-const CartWidget = ({ 
+const CartWidget = (
+  {
     /*Props que recibe el componente*/
-}) => {
-
+  }
+) => {
   const { cartItems } = useContextsCart();
 
-  console.log('cartItems:',cartItems);
+  console.log("cartItems:", cartItems);
   return (
     <div className="cartContainer">
-        <img src={logo} alt="" width="45" height="35" />
-        <p>{cartItems.length}</p> 
+      <Badge badgeContent={cartItems.length} color="primary">
+        <ShoppingCartIcon
+        fontSize="large"
+        />
+      </Badge>
     </div>
   );
 };

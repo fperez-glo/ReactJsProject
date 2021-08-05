@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
 import productJson from "../soyTuMarket.json";
 
+
 const ItemDetailContainer = () => {
+  
   const [ items, setItems ] = useState([]);
   const { prodId } = useParams();
 

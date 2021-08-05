@@ -6,6 +6,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CartWidget from "./components/CartWidget";
 import ContextsCartProvider from "./context/ContextsCart";
+import Cart from "./components/Cart";
 
 const App = () => {
   const styles = {
@@ -34,6 +35,9 @@ const App = () => {
               </Route>
               <Route exact path="/detail/:prodId">
                 <ItemDetailContainer />
+              </Route>
+              <Route exact path="/cart">
+                <Cart/>
               </Route>
             </body>
           </Switch>

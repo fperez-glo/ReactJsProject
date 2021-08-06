@@ -1,16 +1,25 @@
 import { useContextsCart } from "../context/ContextsCart";
-//import AccordionDetail from "./AccordionDetail";
+import AccordionDetail from "./AccordionDetail";
 
 const Cart = () => {
     const { cartItems, setCartItems } = useContextsCart();    
 
-    const deleteItem = () => {
-
-    }
-
+    console.log('Items en el carrito:',typeof(cartItems));
     return (
         <>
-         {/* <AccordionDetail/> */}
+        {cartItems.map(item =>(
+               <>
+                <AccordionDetail
+                key={item.prodId}
+                price={item.price}
+                quantity={item.quantity}
+                prodId={item.prodId}
+                srcImg={item.srcImg}
+                prodTitle={item.prodTitle}
+                />
+                </>
+            ))}
+         
         </>
     )
 }

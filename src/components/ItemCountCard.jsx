@@ -34,6 +34,8 @@ const ItemCountCard = ({
     setProd({
       prodId: prodId,
       price: price,
+      prodTitle: prodTitle,
+      srcImg: srcImg,
     } )
   };
 

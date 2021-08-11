@@ -87,10 +87,10 @@ const ItemCountCard = ({
           <Link to={route}>
             <CardMedia
               component="img"
-              alt="Contemplative Reptile"
+              alt={prodTitle}
               height="200"
               image={srcImg}
-              title="Contemplative Reptile"
+              title={prodTitle}
               onClick={() => setSelectedProd()}
             />
             </Link>

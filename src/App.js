@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CartWidget from "./components/CartWidget";
 import ContextsCartProvider from "./context/ContextsCart";
 import Cart from "./components/Cart";
+import NavBar2 from "./components/NavBar2";
 
 const App = () => {
   const styles = {
@@ -21,6 +22,7 @@ const App = () => {
     <ContextsCartProvider>
       <Router>
         <NavBar className="NavBar" />
+        <NavBar2/>
         <div className="App">
           <Switch>
             <body className="App-body">

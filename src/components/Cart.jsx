@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { useContextsCart } from "../context/ContextsCart";
 import Grid from "@material-ui/core/Grid";
 import CartCard from "./CartCard";
 
 const Cart = () => {
-  const { cartItems, setCartItems, totalPrice } = useContextsCart();
+  const { cartItems, setCartItems, totalPrice,setTotalPrice } = useContextsCart();
+  
+  useEffect(() => {
+    setTotalPrice(cartItems.reduce((acum, valor)=>(acum + (valor.quantity * valor.price)), 0));
+  }, [])
 
   console.log("Items en el carrito:", cartItems);
   return (

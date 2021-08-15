@@ -4,10 +4,12 @@ import ItemDetail from "./ItemDetail";
 import productJson from "../soyTuMarket.json";
 import { getFirestore } from "../api/fireBaseService";
 import { ProductionQuantityLimitsRounded } from "@material-ui/icons";
+import Spinner from "react-bootstrap/Spinner";
 
 const ItemDetailContainer = () => {
   const dbQuery = getFirestore();
   const [ items, setItems ] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { prodId } = useParams();
 
   useEffect(()=>{
@@ -18,15 +20,22 @@ const ItemDetailContainer = () => {
     {
       setItems(items);
     }
+    
   },[prodId])
 
   const fetchFilterItems = async (prodId) =>{
     const filterItems = await dbQuery.collection("producto").doc(prodId).get();
-    setItems(filterItems.data())
+    setItems(filterItems.data());
+    setLoading(false);
   }
 
   return (
     <>
+      {loading ? (
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        ) : (
       <ItemDetail 
         prodTitle={items.prodTitle}
         price={items.price}
@@ -34,6 +43,7 @@ const ItemDetailContainer = () => {
         srcImg={items.srcImg}
         description={items.description}
       />
+        )}
     </>
   );
 };

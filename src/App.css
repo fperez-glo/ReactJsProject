@@ -9,9 +9,9 @@
 }
 
 .App-body {
-  background-color: #282c34;
+  background-color: #ffff;
   display: flex;
-  color: white;
+  color: #000;
   min-height: 100vh;
   flex-direction: row;
   align-items: flex-start;

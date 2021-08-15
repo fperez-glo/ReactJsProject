@@ -99,12 +99,6 @@ const CartCard = ({
             enableAddCartButton={false}
             addedQuantity={addedQuantity}
           />
-          <IconButton color="primary">
-            <DeleteForeverOutlinedIcon
-              size="small"
-              onClick={() => deleteCartItem(prodId)}
-            />
-          </IconButton>
         </CardActions>
         <Typography
           className={classes.title}
@@ -113,6 +107,12 @@ const CartCard = ({
         >
           ${pricePerProduct}
         </Typography>
+        <IconButton color="primary">
+            <DeleteForeverOutlinedIcon
+              size="small"
+              onClick={() => deleteCartItem(prodId)}
+            />
+          </IconButton>
       </Card>
     </>
   );

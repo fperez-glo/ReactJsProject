@@ -83,7 +83,7 @@ const ItemCounter = ({ enableAddCartButton = true, styledParam, addedQuantity })
         </Card>
       )}
       {inCart && (
-        <Link to="/cart">
+        <Link id="RouterNavLink" to="/cart">
           <Button variant="success" style={styles.addCartButton}>
             Finalizar Compra
           </Button>

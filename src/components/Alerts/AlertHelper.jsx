@@ -1,14 +1,15 @@
 import swal from 'sweetalert2'
 
 export default class AlertHelper {
-    static success(message, timeOut= 2000, title= "", buttonTitle = "Confirmar") {
+    static success(message, html,timeOut= 2000, showConfirmButton= false, buttonTitle = 'Confirmar', title= "") {
         swal.fire({
             title: title,
             icon: "success",
+            html: html,
             text: message,
             timer : timeOut,
-            button: buttonTitle,
-            showConfirmButton: false,
+            confirmButtonText: buttonTitle,
+            showConfirmButton: showConfirmButton,
         })
       }
       static info(message, timeOut= 2000, title= "", buttonTitle = "Confirmar") {

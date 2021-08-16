@@ -8,7 +8,11 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CartCard from "./CartCard";
 import { getFirestore } from "../api/fireBaseService";
-import { CircleNotificationsTwoTone, PublishedWithChangesRounded } from "@material-ui/icons";
+import {
+  CircleNotificationsTwoTone,
+  PublishedWithChangesRounded,
+  TodayRounded,
+} from "@material-ui/icons";
 import Spinner from "react-bootstrap/Spinner";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,22 +50,49 @@ const Cart = () => {
     setBuyer({ ...buyer, [evtChange.target.name]: evtChange.target.value });
   };
 
+  console.log("buyer:", buyer);
+
   const handlePurchase = async () => {
-    if (!buyer.name || !buyer.email || !buyer.phone){
-      console.log('algun campo esta vacio')  //FIXME: VER COMO HACER PARA QUE LOS INPUTS SEAN OBLIGATORIOS.
-      return;
-    }
-    setLoading(true);
+    //Control para evitar que se envie el pedido si no se completaron los datos mandatarios.
+    if (!buyer.name || !buyer.email || !buyer.phone) {
+      console.log("algun campo esta vacio");
+      showAlert.info(es.mandatoryInputs);
+    } else {
+      setLoading(true);
 
-    //Envio la informacion de la compra a la base de datos en fireStore.
-    const db = getFirestore();
-    await db
-      .collection("purchaseOrders")
-      .add({ buyer, cartItems, date: "hoy", totalPrice });
+      //Envio la informacion de la compra a la base de datos en fireStore.
+      const db = getFirestore();
+      const date = Date.now();
+      const dia = new Date(date);
 
-    clearData();
-    showAlert.success(es.purchaseSucces);
-    setLoading(false);
+      const fecha =
+        dia.toLocaleDateString() +
+        " " +
+        dia.getHours() +
+        ":" +
+        dia.getMinutes() +
+        ":" +
+        dia.getSeconds();
+
+      await db
+        .collection("purchaseOrders")
+        .add({ buyer, cartItems, date: fecha, totalPrice });
+
+      const orderId = await db
+        .collection("purchaseOrders")
+        .orderBy("date", "desc")
+        .get();
+
+      clearData();
+      setLoading(false);
+
+      showAlert.success(
+        "",
+        es.purchaseSucces + orderId.docs[0].id.bold(),
+        false,
+        true
+      );
+    };
   };
 
   const clearData = () => {
@@ -128,11 +159,7 @@ const Cart = () => {
                   value={buyer.email}
                 />
                 Total: ${totalPrice}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                >
+                <Button variant="contained" color="primary" type="submit">
                   Comprar
                 </Button>
               </form>

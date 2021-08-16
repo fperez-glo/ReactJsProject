@@ -40,23 +40,20 @@ const ItemCardContainer = () => {
   }, [categoryId]);
 
   const fetchItems = async (categoryId) => {
+    setLoading(true);
     const productos = await dbQuery.collection("producto").get();
 
-    console.log("productos:", productos);
-    //console.log('productos:',productos.doc("asus1070ti").data());
+    const fetchFilterItems = async(categoryId) =>{
+      const filterItems = await dbQuery.collection("producto").where('categoryId','==',categoryId).get();
+      setItems(filterItems.docs)
+    }
 
     if (categoryId) {
-      setTimeout(() => {
-        setItems(productJson.filter((it) => it.categoryId === categoryId));
-      }, 200);
+      await fetchFilterItems(categoryId);
     } else {
-      setTimeout(() => {
-        setItems(productJson);
-      }, 200);
+      setItems(productos.docs);
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 200);
+    setLoading(false);
   };
 
   return (
@@ -71,13 +68,13 @@ const ItemCardContainer = () => {
             {items.map((el) => (
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <ItemCountCard
-                  srcImg={el.srcImg}
-                  prodTitle={el.prodTitle}
-                  key={el.prodId}
-                  prodId={el.prodId}
-                  stock={el.stock}
-                  price={el.price}
-                  description={el.description}
+                  srcImg={el.data().srcImg}
+                  prodTitle={el.data().prodTitle}
+                  key={el.id}
+                  prodId={el.id}
+                  stock={el.data().stock}
+                  price={el.data().price}
+                  description={el.data().description}
                 />
               </Grid>
             ))}

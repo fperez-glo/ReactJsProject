@@ -5,7 +5,7 @@ import { useContextsCart } from "../context/ContextsCart";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -30,80 +30,91 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 16,
-    fontWeight:'bold',
+    fontWeight: "bold",
   },
   pos: {
     marginBottom: 12,
   },
 });
 
-const CartCard = ({ prodId, price, addedQuantity=1, prodTitle, srcImg, description,}) => {
-  const { cartItems, setCartItems,totalPrice, setTotalPrice } = useContextsCart();
+const CartCard = ({
+  prodId,
+  price,
+  addedQuantity = 1,
+  prodTitle,
+  srcImg,
+  description,
+}) => {
+  const { cartItems, setCartItems } = useContextsCart();
   const classes = useStyles();
   const [pricePerProduct, setPricePerProduct] = useState(1);
   const bull = <span className={classes.bullet}>•</span>;
 
-
   useEffect(() => {
-    console.log('useEffect initialLoad:');
+    console.log("useEffect initialLoad:");
     initialLoad();
-  }, [])
-
-  
+  }, []);
 
   const initialLoad = () => {
     setPricePerProduct(addedQuantity * price);
     //setTotalPrice(cartItems.reduce(el => el.price*el.addedQuantity));
   };
 
-  const deleteCartItem = (id) => { 
+  const deleteCartItem = (id) => {
+    const index = cartItems.findIndex((el) => el.prodId === id);
 
-    const index = cartItems.findIndex(el => el.prodId === id);
-
-    if (index > -1){
+    if (index > -1) {
       cartItems.splice(index, 1);
-      const newCartItems = cartItems.filter(item => item.prodId !== cartItems.prodId)
-      setCartItems(newCartItems)
-    };
-
+      const newCartItems = cartItems.filter(
+        (item) => item.prodId !== cartItems.prodId
+      );
+      setCartItems(newCartItems);
+    }
   };
 
   return (
-    <Card className={classes.root} variant="outlined">
-      <CardContent className={classes.content}>
-        <CardMedia
-          component="img"
-          alt={prodTitle}
-          height="100"
-          image={srcImg}
-          title={prodTitle}
-        />
+    <>
+      <Card className={classes.root} variant="outlined">
+        <CardContent className={classes.content}>
+          <CardMedia
+            component="img"
+            alt={prodTitle}
+            height="100"
+            image={srcImg}
+            title={prodTitle}
+          />
+          <Typography
+            className={classes.title}
+            //color="textSecondary"
+            gutterBottom
+          >
+            {prodTitle}
+          </Typography>
+          <Typography variant="h5" component="h2" color="textSecondary">
+            {description}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <ItemCounter
+            enableAddCartButton={false}
+            addedQuantity={addedQuantity}
+          />
+        </CardActions>
         <Typography
-          className={classes.title}
-          //color="textSecondary"
-          gutterBottom
-        >
-          {prodTitle}
-        </Typography>
-        <Typography variant="h5" component="h2" color="textSecondary">{description}</Typography>
-      </CardContent>
-      <CardActions>
-        <ItemCounter
-         enableAddCartButton={false}
-         addedQuantity={addedQuantity}
-        />
-        <IconButton color="primary">
-          <DeleteForeverOutlinedIcon size="small" onClick={() => deleteCartItem(prodId)}/>
-        </IconButton>
-      </CardActions>
-      <Typography
           className={classes.title}
           //color="textSecondary"
           gutterBottom
         >
           ${pricePerProduct}
         </Typography>
-    </Card>
+        <IconButton color="primary">
+            <DeleteForeverOutlinedIcon
+              size="small"
+              onClick={() => deleteCartItem(prodId)}
+            />
+          </IconButton>
+      </Card>
+    </>
   );
 };
 

@@ -38,6 +38,7 @@ const NavBar = () => {
               <NavDropdown title="Catalogo" id="basic-nav-dropdown">
                <Link to="/category/procesadores"><NavDropdown.Item href="#action/3.1">Procesadores</NavDropdown.Item></Link>
                <Link to="/category/videoCards"><NavDropdown.Item href="#action/3.2">Tarjetas de Video</NavDropdown.Item></Link>
+               <Link to="/category/consolas"><NavDropdown.Item href="#action/3.3">Consolas</NavDropdown.Item></Link>
               </NavDropdown>
             </a>
           </li>

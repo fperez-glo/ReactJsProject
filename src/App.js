@@ -21,8 +21,8 @@ const App = () => {
   return (
     <ContextsCartProvider>
       <Router>
-        <NavBar className="NavBar" />
-        <NavBar2/>
+        {/* <NavBar className="NavBar" /> */}
+        <NavBar2 className="NavBar"/>
         <div className="App">
           <Switch>
             <body className="App-body">

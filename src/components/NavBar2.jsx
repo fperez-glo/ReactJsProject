@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import CartWidget from "./CartWidget";
 import pageLogo from "../images/logo.svg";
 import { alpha, makeStyles } from "@material-ui/core/styles";
@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
+import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -17,9 +18,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -92,49 +93,54 @@ const useStyles = makeStyles((theme) => ({
 
 //APARTADO DE LAS TABS
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-  
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
-  
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
+}
 
 const NavBar2 = () => {
-    
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [catalogAnchorEl, setCatalogAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
+  const isAccountMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isCatalogMenuOpen = Boolean(catalogAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleCatalogMenuOpen = (event) => {
+    setCatalogAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
@@ -143,6 +149,7 @@ const NavBar2 = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setCatalogAnchorEl(null);
     handleMobileMenuClose();
   };
 
@@ -151,18 +158,57 @@ const NavBar2 = () => {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
+  const catalogMenuId = "catalog-menu";
+
+  const renderAccountMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
+      open={isAccountMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
+    </Menu>
+  );
+
+  const renderCatalogMenu = (
+    <Menu
+      anchorEl={catalogAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={catalogMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isCatalogMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/category/videoCards"
+        >
+          Tarjetas de Video
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/category/procesadores"
+        >
+          Procesadores
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/category/consolas"
+        >
+          Consolas
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -211,6 +257,9 @@ const NavBar2 = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
+    if (newValue===0){
+      return <Link to="/"  />;
+    }
     setValue(newValue);
   };
 
@@ -226,7 +275,9 @@ const NavBar2 = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link to="/"><img src={pageLogo} alt="" width="45" height="35" /></Link>
+          <Link to="/">
+            <img src={pageLogo} alt="" width="45" height="35" />
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -242,31 +293,29 @@ const NavBar2 = () => {
           </div>
           <div className={classes.tabs}>
             <AppBar position="static">
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                
-                <Link to="/"><Tab label="Home" {...a11yProps(0)}/></Link>
-                <Tab label="Catalogo" {...a11yProps(1)} />
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="simple tabs example"
+              >
+                <Tab onClick={handleChange} label="Home" {...a11yProps(0)} />
+                <Tab
+                  label="Catalogo"
+                  onClick={handleCatalogMenuOpen}
+                  aria-controls={catalogMenuId}
+                  aria-haspopup="true"
+                  {...a11yProps(1)}
+                />
                 <Tab label="Sucursales" {...a11yProps(2)} />
-                </Tabs>
+              </Tabs>
             </AppBar>
-            {/*
-            <TabPanel value={value} index={0}>
-                Item One
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
-            */}
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton color="inherit">
-             <Link to="/cart">
-              <CartWidget/>
-             </Link>
+              <Link to="/cart">
+                <CartWidget />
+              </Link>
             </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={3} color="secondary">
@@ -284,21 +333,11 @@ const NavBar2 = () => {
               <AccountCircle />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+      {renderAccountMenu}
+      {renderCatalogMenu}
     </div>
   );
 };

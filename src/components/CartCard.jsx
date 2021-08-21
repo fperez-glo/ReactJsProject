@@ -53,7 +53,7 @@ const CartCard = ({
   useEffect(() => {
     console.log("useEffect initialLoad:");
     initialLoad();
-  }, []);
+  }, [addedQuantity]);
 
   const initialLoad = () => {
     setPricePerProduct(addedQuantity * price);
@@ -98,6 +98,7 @@ const CartCard = ({
           <ItemCounter
             enableAddCartButton={false}
             addedQuantity={addedQuantity}
+            prodId={prodId}
           />
         </CardActions>
         <Typography

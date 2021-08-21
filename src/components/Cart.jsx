@@ -3,12 +3,16 @@ import showAlert from "./Alerts/AlertHelper";
 import es from "../idiom/es";
 import { useContextsCart } from "../context/ContextsCart";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CartCard from "./CartCard";
 import { getFirestore } from "../api/fireBaseService";
-import { CircleNotificationsTwoTone, PublishedWithChangesRounded } from "@material-ui/icons";
+import {
+  CircleNotificationsTwoTone,
+  PublishedWithChangesRounded,
+} from "@material-ui/icons";
 import Spinner from "react-bootstrap/Spinner";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [buyer, setBuyer] = useState(initialState);
+  const [enabledButton, setEnabledButton] = useState(true);
 
   const { cartItems, setCartItems, totalPrice, setTotalPrice } =
     useContextsCart();
@@ -40,17 +45,22 @@ const Cart = () => {
     setTotalPrice(
       cartItems.reduce((acum, valor) => acum + valor.quantity * valor.price, 0)
     );
-  }, []);
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (buyer.name && buyer.email && buyer.phone){
+      setEnabledButton(false);
+    } else {
+      setEnabledButton(true);
+    }
+  }, [buyer])
 
   const handleFormChange = (evtChange) => {
     setBuyer({ ...buyer, [evtChange.target.name]: evtChange.target.value });
   };
 
   const handlePurchase = async () => {
-    if (!buyer.name || !buyer.email || !buyer.phone){
-      console.log('algun campo esta vacio')  //FIXME: VER COMO HACER PARA QUE LOS INPUTS SEAN OBLIGATORIOS.
-      return;
-    }
+    
     setLoading(true);
 
     //Envio la informacion de la compra a la base de datos en fireStore.
@@ -62,6 +72,7 @@ const Cart = () => {
     clearData();
     showAlert.success(es.purchaseSucces);
     setLoading(false);
+  
   };
 
   const clearData = () => {
@@ -100,6 +111,13 @@ const Cart = () => {
                 onChange={handleFormChange}
                 onSubmit={handlePurchase}
               >
+                
+                {/* {enabledButton ??   TODO: lo saco momentaneamente ya que no puedo logarar que aparezca el texto en la grilla.
+                 <Typography variant="overline" display="block" gutterBottom>
+                   Por favor ingrese los datos de contacto.
+                 </Typography>
+                } */}
+
                 <TextField
                   id="outlined-basic"
                   label="Nombre"
@@ -128,11 +146,7 @@ const Cart = () => {
                   value={buyer.email}
                 />
                 Total: ${totalPrice}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                >
+                <Button variant="contained" color="primary" type="submit" disabled={enabledButton}>
                   Comprar
                 </Button>
               </form>

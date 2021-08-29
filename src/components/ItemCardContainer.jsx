@@ -64,6 +64,8 @@ const ItemCardContainer = () => {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         ) : (
+          
+          // TODO: Agregar en caso de que items sea vacio un texto que indique no hay items para mostrar. (esto es por si hay alguna categoria sin items disponibles).
           <Grid container spacing={3}>
             {items.map((el) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={el.id}>

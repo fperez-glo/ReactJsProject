@@ -10,8 +10,7 @@ const CartWidget = (
   }
 ) => {
   const { cartItems } = useContextsCart();
-
-  console.log("cartItems:", cartItems);
+  
   return (
     <div className="cartContainer">
       <Badge badgeContent={cartItems.length} color="secondary">

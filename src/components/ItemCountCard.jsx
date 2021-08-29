@@ -41,6 +41,7 @@ const ItemCountCard = ({
   const classes = useStyles();
 
   const route = `/detail/${prodId}`;
+  
   const { cartItems, setCartItems, prodSet, setProd } = useContextsCart();
 
   const setSelectedProd = () => {

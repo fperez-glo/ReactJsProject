@@ -66,11 +66,10 @@ const ItemCardContainer = () => {
         ) : (
           <Grid container spacing={3}>
             {items.map((el) => (
-              <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={el.id}>
                 <ItemCountCard
                   srcImg={el.data().srcImg}
                   prodTitle={el.data().prodTitle}
-                  key={el.id}
                   prodId={el.id}
                   stock={el.data().stock}
                   price={el.data().price}

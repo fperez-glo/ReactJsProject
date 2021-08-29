@@ -51,7 +51,6 @@ const CartCard = ({
   const bull = <span className={classes.bullet}>•</span>;
 
   useEffect(() => {
-    console.log("useEffect initialLoad:");
     initialLoad();
   }, [addedQuantity]);
 

@@ -83,7 +83,6 @@ const ItemCounter = ({
 
   return (
     <>
-      {/*console.log('cartItems en render!!!!!',cartItems)*/}
       {!inCart && (
         <Card style={styles.Card}>
           <Card.Body style={styles.buttonCounterStyle}>

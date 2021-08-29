@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import CartWidget from "./CartWidget";
 import pageLogo from "../images/logo.svg";
@@ -20,6 +20,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
+import { getFirestore } from "../api/fireBaseService";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -128,14 +129,27 @@ function a11yProps(index) {
 }
 
 const NavBar2 = () => {
+  const db = getFirestore();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [catalogAnchorEl, setCatalogAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [categories, setCategories] = useState([])
 
   const isAccountMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isCatalogMenuOpen = Boolean(catalogAnchorEl);
+
+  useEffect(() => {
+    const fetchDBCategories = async () => {
+      const categoriesData = await db.collection('categories').get();
+      setCategories(categoriesData.docs);
+    };
+    
+    fetchDBCategories();
+
+  }, []);
+  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -149,7 +163,7 @@ const NavBar2 = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (event) => {
     setAnchorEl(null);
     setCatalogAnchorEl(null);
   };
@@ -186,30 +200,15 @@ const NavBar2 = () => {
       open={isCatalogMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          style={{ textDecoration: "none", color: "black" }}
-          to="/category/videoCards"
-        >
-          Tarjetas de Video
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          style={{ textDecoration: "none", color: "black" }}
-          to="/category/procesadores"
-        >
-          Procesadores
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          style={{ textDecoration: "none", color: "black" }}
-          to="/category/consolas"
-        >
-          Consolas
-        </Link>
-      </MenuItem>
+      {categories.map((item) => (
+        <MenuItem onClick={handleMenuClose}
+                  key={item.data().categoryId}>
+         <Link style={{ textDecoration: "none", color: "black" }}
+                to={`/category/${item.data().categoryId}`}>
+          {item.data().descripcion}
+         </Link>
+        </MenuItem>
+      ))}
     </Menu>
   );
 
@@ -312,8 +311,8 @@ const NavBar2 = () => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit" onClick={() => handleChange({valueOnLinkedTab: null})}>
-              <Link to="/cart" style={{color:'white', textDecoration:'none'}}>
+            <IconButton color="inherit">
+              <Link to="/cart" style={{color:'white', textDecoration:'none'}} onClick={() => handleChange({valueOnLinkedTab: null})}>
                 <CartWidget/>
               </Link>
             </IconButton>

@@ -12,7 +12,6 @@ import NavBar2 from "./components/NavBar2";
 const App = () => {
   const styles = {
     body: {
-      backgroundColor: "green",
       width: "100%",
       height: "300px",
     },

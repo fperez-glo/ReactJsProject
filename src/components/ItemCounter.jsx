@@ -42,8 +42,8 @@ const ItemCounter = ({
       justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 4,
-      borderStyle: "inset",
-      borderColor: "lightGrey",
+      //borderStyle: "inset",
+      //borderColor: "lightGrey",
       borderRadius: 10,
     },
     addCartButton: {

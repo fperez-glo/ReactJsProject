@@ -89,6 +89,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  link: {
+    color:'#ffff',
+    textDecoration:'none',
+  },
 }));
 
 //APARTADO DE LAS TABS
@@ -256,11 +260,8 @@ const NavBar2 = () => {
   //APARTADO DE LAS TABS
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    if (newValue===0){
-      return <Link to="/"  />;
-    }
-    setValue(newValue);
+  const handleChange = ({valueOnLinkedTab}, newValue) => {
+    setValue(newValue ?? valueOnLinkedTab);
   };
 
   return (
@@ -276,7 +277,7 @@ const NavBar2 = () => {
             <MenuIcon />
           </IconButton>
           <Link to="/">
-            <img src={pageLogo} alt="" width="45" height="35" />
+            <img src={pageLogo} alt="" width="45" height="35" ></img>
           </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -298,7 +299,9 @@ const NavBar2 = () => {
                 onChange={handleChange}
                 aria-label="simple tabs example"
               >
-                <Tab onClick={handleChange} label="Home" {...a11yProps(0)} />
+                <Link to='/' style={{color:'white', textDecoration:'none'}}>
+                  <Tab label="Home" {...a11yProps(0)} onClick={() => handleChange({valueOnLinkedTab: 0})}/>
+                </Link>
                 <Tab
                   label="Catalogo"
                   onClick={handleCatalogMenuOpen}
@@ -312,9 +315,9 @@ const NavBar2 = () => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
-              <Link to="/cart">
-                <CartWidget />
+            <IconButton color="inherit" onClick={() => handleChange({valueOnLinkedTab: null})}>
+              <Link to="/cart" style={{color:'white', textDecoration:'none'}}>
+                <CartWidget/>
               </Link>
             </IconButton>
             <IconButton color="inherit">
@@ -331,6 +334,17 @@ const NavBar2 = () => {
               color="inherit"
             >
               <AccountCircle />
+            </IconButton>
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
             </IconButton>
           </div>
         </Toolbar>

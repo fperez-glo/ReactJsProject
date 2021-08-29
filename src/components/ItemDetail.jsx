@@ -14,27 +14,17 @@ const ItemDetail = ({
       width: "30rem",
       display:"flex",
       flexDirection: "row",
-<<<<<<< HEAD
-=======
-      //backgroundColor:"#282c34",
->>>>>>> origin
       justifyContent: "flex-start",
       alignItems: "flex-start",
       borderStyle: "none",
-      //backgroundColor:'red',
     },
     detail: {
-<<<<<<< HEAD
-=======
-      //color: "white",
->>>>>>> origin
       width: "15rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 4,
-      //backgroundColor:'red',
     },
   };
 

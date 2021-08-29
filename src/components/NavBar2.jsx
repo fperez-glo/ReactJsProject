@@ -9,14 +9,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
-import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -154,7 +152,6 @@ const NavBar2 = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     setCatalogAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -227,21 +224,21 @@ const NavBar2 = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
+      <Link to="/cart" style={{color:'black', textDecoration:'none'}} onClick={() => handleChange({valueOnLinkedTab: null})}>
+        <MenuItem onClick={handleMobileMenuClose}>
+            <IconButton color="inherit" >    
+              <CartWidget/>
+            </IconButton>
+          <p>Carrito</p>
+        </MenuItem>
+      </Link>
+      <MenuItem onClick={handleMobileMenuClose}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            <FavoriteIcon/>
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Favoritos</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -252,7 +249,7 @@ const NavBar2 = () => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Perfil</p>
       </MenuItem>
     </Menu>
   );
@@ -322,7 +319,7 @@ const NavBar2 = () => {
             </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={3} color="secondary">
-                <NotificationsIcon />
+                <FavoriteIcon/>
               </Badge>
             </IconButton>
             <IconButton

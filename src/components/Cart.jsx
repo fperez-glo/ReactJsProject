@@ -48,7 +48,7 @@ const Cart = () => {
   }, [cartItems]);
 
   useEffect(() => {
-    if (buyer.name && buyer.email && buyer.phone){
+    if (buyer.name && buyer.email===buyer.emailValidate && buyer.phone){
       setEnabledButton(false);
     } else {
       setEnabledButton(true);
@@ -59,14 +59,8 @@ const Cart = () => {
     setBuyer({ ...buyer, [evtChange.target.name]: evtChange.target.value });
   };
 
-  console.log("buyer:", buyer);
-
   const handlePurchase = async () => {
-    //Control para evitar que se envie el pedido si no se completaron los datos mandatarios.
-    if (!buyer.name || !buyer.email || !buyer.phone) {
-      console.log("algun campo esta vacio");
-      showAlert.info(es.mandatoryInputs);
-    } else {
+    
       setLoading(true);
 
       //Envio la informacion de la compra a la base de datos en fireStore.
@@ -85,7 +79,16 @@ const Cart = () => {
 
       await db
         .collection("purchaseOrders")
-        .add({ buyer, cartItems, date: fecha, totalPrice });
+        .add({ buyer:{
+                      name: buyer.name,
+                      email: buyer.email,
+                      phone: buyer.phone
+                     },                       
+                cartItems, 
+                date: fecha,
+                totalPrice, 
+                status: 'en proceso' 
+              });
 
       const orderId = await db
         .collection("purchaseOrders")
@@ -101,7 +104,6 @@ const Cart = () => {
         false,
         true
       );
-    };
   };
 
   const clearData = () => {
@@ -173,6 +175,15 @@ const Cart = () => {
                   type="email"
                   variant="outlined"
                   value={buyer.email}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Confirmar Email"
+                  name="emailValidate"
+                  size="small"
+                  type="email"
+                  variant="outlined"
+                  value={buyer.emailValidate}
                 />
                 Total: ${totalPrice}
                 <Button variant="contained" color="primary" type="submit" disabled={enabledButton}>

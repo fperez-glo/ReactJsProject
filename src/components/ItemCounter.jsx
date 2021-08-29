@@ -6,10 +6,27 @@ import showAlert from "./Alerts/AlertHelper";
 import es from "../idiom/es";
 //import CartContext from "../context/CartContext";
 
-const ItemCounter = ({ enableAddCartButton = true, styledParam, addedQuantity }) => {
+const ItemCounter = ({
+  enableAddCartButton = true,
+  styledParam,
+  addedQuantity,
+  prodId,
+}) => {
   const [quantity, setQuantity] = useState(1);
+  const [inCartItemQty, setInCartItemQty] = useState(addedQuantity);
   const [inCart, setInCart] = useState(false);
-  const { cartItems, setCartItems, prodSet } = useContextsCart();
+  const { cartItems, setCartItems, prodSet, setTotalPrice } = useContextsCart();
+
+  useEffect(() => {
+    //Busco el indice
+    const index = cartItems.findIndex((el) => el.prodId === prodId);
+    //Si existe el indice en el carrito ---> modifico la cantidad del producto
+    cartItems[index] && (cartItems[index].quantity = inCartItemQty);
+
+    setTotalPrice(
+      cartItems.reduce((acum, valor) => acum + valor.quantity * valor.price, 0)
+    );
+  }, [inCartItemQty]);
 
   const styles = {
     Card: {
@@ -25,8 +42,8 @@ const ItemCounter = ({ enableAddCartButton = true, styledParam, addedQuantity })
       justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 4,
-      borderStyle: 'inset',
-      borderColor: 'lightGrey',
+      borderStyle: "inset",
+      borderColor: "lightGrey",
       borderRadius: 10,
     },
     addCartButton: {
@@ -37,11 +54,14 @@ const ItemCounter = ({ enableAddCartButton = true, styledParam, addedQuantity })
 
   const add = () => {
     setQuantity(quantity + 1);
+    inCartItemQty && setInCartItemQty(inCartItemQty + 1);
   };
 
   const subtract = () => {
-    if (quantity > 1) {
+    if (inCartItemQty > 1 || quantity > 1) {
       setQuantity(quantity - 1);
+
+      inCartItemQty && setInCartItemQty(inCartItemQty - 1);
     }
   };
 
@@ -70,13 +90,16 @@ const ItemCounter = ({ enableAddCartButton = true, styledParam, addedQuantity })
             <Button variant="primary" onClick={() => subtract()}>
               -
             </Button>
-            <Card.Text>{addedQuantity ?? quantity}</Card.Text>
+            <Card.Text>{inCartItemQty ?? quantity}</Card.Text>
             <Button variant="primary" onClick={() => add()}>
               +
             </Button>
           </Card.Body>
           {enableAddCartButton && (
-            <Button onClick={() => addToCart()} style={styledParam ?? styles.addCartButton}>
+            <Button
+              onClick={() => addToCart()}
+              style={styledParam ?? styles.addCartButton}
+            >
               Añadir al carrito
             </Button>
           )}

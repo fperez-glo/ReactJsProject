@@ -44,7 +44,6 @@ const ItemCountCard = ({
   const { cartItems, setCartItems, prodSet, setProd } = useContextsCart();
 
   const setSelectedProd = () => {
-    console.log('PASAAAAAA')
     setProd({
       prodId: prodId,
       price: price,
@@ -65,9 +64,6 @@ const ItemCountCard = ({
       quantity: 1,
       description: description,
     };
-    
-    console.log('POR ACA TAMBIEEEN');
-    console.log('productSelected:',productSelected);
 
     const findItem = cartItems.find((item) => item.prodId === productSelected.prodId);
     //Valido si el item que quiero ingresar al carro ya existe.
@@ -87,10 +83,10 @@ const ItemCountCard = ({
           <Link to={route}>
             <CardMedia
               component="img"
-              alt="Contemplative Reptile"
+              alt={description}
               height="200"
               image={srcImg}
-              title="Contemplative Reptile"
+              title={description}
               onClick={() => setSelectedProd()}
             />
             </Link>

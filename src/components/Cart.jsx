@@ -3,6 +3,7 @@ import showAlert from "./Alerts/AlertHelper";
 import es from "../idiom/es";
 import { useContextsCart } from "../context/ContextsCart";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -11,7 +12,10 @@ import { getFirestore } from "../api/fireBaseService";
 import {
   CircleNotificationsTwoTone,
   PublishedWithChangesRounded,
+<<<<<<< HEAD
   TodayRounded,
+=======
+>>>>>>> ef43ff072fd0c68aa0a76e03a0c45a03fa961611
 } from "@material-ui/icons";
 import Spinner from "react-bootstrap/Spinner";
 
@@ -34,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [buyer, setBuyer] = useState(initialState);
+  const [enabledButton, setEnabledButton] = useState(true);
 
   const { cartItems, setCartItems, totalPrice, setTotalPrice } =
     useContextsCart();
@@ -44,7 +49,15 @@ const Cart = () => {
     setTotalPrice(
       cartItems.reduce((acum, valor) => acum + valor.quantity * valor.price, 0)
     );
-  }, []);
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (buyer.name && buyer.email && buyer.phone){
+      setEnabledButton(false);
+    } else {
+      setEnabledButton(true);
+    }
+  }, [buyer])
 
   const handleFormChange = (evtChange) => {
     setBuyer({ ...buyer, [evtChange.target.name]: evtChange.target.value });
@@ -53,6 +66,7 @@ const Cart = () => {
   console.log("buyer:", buyer);
 
   const handlePurchase = async () => {
+<<<<<<< HEAD
     //Control para evitar que se envie el pedido si no se completaron los datos mandatarios.
     if (!buyer.name || !buyer.email || !buyer.phone) {
       console.log("algun campo esta vacio");
@@ -93,6 +107,21 @@ const Cart = () => {
         true
       );
     };
+=======
+    
+    setLoading(true);
+
+    //Envio la informacion de la compra a la base de datos en fireStore.
+    const db = getFirestore();
+    await db
+      .collection("purchaseOrders")
+      .add({ buyer, cartItems, date: "hoy", totalPrice });
+
+    clearData();
+    showAlert.success(es.purchaseSucces);
+    setLoading(false);
+  
+>>>>>>> ef43ff072fd0c68aa0a76e03a0c45a03fa961611
   };
 
   const clearData = () => {
@@ -131,6 +160,13 @@ const Cart = () => {
                 onChange={handleFormChange}
                 onSubmit={handlePurchase}
               >
+                
+                {/* {enabledButton ??   TODO: lo saco momentaneamente ya que no puedo logarar que aparezca el texto en la grilla.
+                 <Typography variant="overline" display="block" gutterBottom>
+                   Por favor ingrese los datos de contacto.
+                 </Typography>
+                } */}
+
                 <TextField
                   id="outlined-basic"
                   label="Nombre"
@@ -159,7 +195,11 @@ const Cart = () => {
                   value={buyer.email}
                 />
                 Total: ${totalPrice}
+<<<<<<< HEAD
                 <Button variant="contained" color="primary" type="submit">
+=======
+                <Button variant="contained" color="primary" type="submit" disabled={enabledButton}>
+>>>>>>> ef43ff072fd0c68aa0a76e03a0c45a03fa961611
                   Comprar
                 </Button>
               </form>

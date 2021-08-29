@@ -83,10 +83,17 @@ const ItemCountCard = ({
           <Link to={route}>
             <CardMedia
               component="img"
+<<<<<<< HEAD
               alt={description}
               height="200"
               image={srcImg}
               title={description}
+=======
+              alt={prodTitle}
+              height="200"
+              image={srcImg}
+              title={prodTitle}
+>>>>>>> agregadoNavBar2
               onClick={() => setSelectedProd()}
             />
             </Link>

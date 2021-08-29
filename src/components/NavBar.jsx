@@ -47,7 +47,7 @@ const NavBar = () => {
               Sucursales
             </a>
           </li>
-          <Link to="/cart">
+          <Link id="RouterNavLink" to="/cart">
             <CartWidget/>
           </Link>
         </div>

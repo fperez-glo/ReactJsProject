@@ -37,7 +37,7 @@ const App = () => {
               <Route exact path="/detail/:prodId">
                 <ItemDetailContainer />
               </Route>
-              <Route exact path="/cart">
+              <Route exact path="/cart" id="RouterNavLink">
                 <Cart/>
               </Route>
             </body>

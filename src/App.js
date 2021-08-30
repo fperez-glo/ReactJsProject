@@ -1,13 +1,11 @@
-import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import ItemCardContainer from "./components/ItemCardContainer";
-import ItemDetailContainer from "./components/ItemDetailContainer";
+import ItemCardContainer from "./components/ItemsCards/ItemCardContainer";
+import ItemDetailContainer from "./components/ItemsCards/ItemDetailContainer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CartWidget from "./components/CartWidget";
 import ContextsCartProvider from "./context/ContextsCart";
-import Cart from "./components/Cart";
-import NavBar2 from "./components/NavBar2";
+import Cart from "./components/Cart/Cart";
+import NavBar2 from "./components/NavBar/NavBar2";
 
 const App = () => {
   const styles = {

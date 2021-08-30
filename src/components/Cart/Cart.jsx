@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import showAlert from "./Alerts/AlertHelper";
-import es from "../idiom/es";
-import { useContextsCart } from "../context/ContextsCart";
+import showAlert from "../Alerts/AlertHelper";
+import es from "../../idiom/es";
+import { useContextsCart } from "../../context/ContextsCart";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CartCard from "./CartCard";
-import { getFirestore } from "../api/fireBaseService";
+import { getFirestore } from "../../api/fireBaseService";
 import {
   CircleNotificationsTwoTone,
   PublishedWithChangesRounded,
@@ -142,13 +142,6 @@ const Cart = () => {
                 onChange={handleFormChange}
                 onSubmit={handlePurchase}
               >
-                
-                {/* {enabledButton ??   TODO: lo saco momentaneamente ya que no puedo logarar que aparezca el texto en la grilla.
-                 <Typography variant="overline" display="block" gutterBottom>
-                   Por favor ingrese los datos de contacto.
-                 </Typography>
-                } */}
-
                 <TextField
                   id="outlined-basic"
                   label="Nombre"

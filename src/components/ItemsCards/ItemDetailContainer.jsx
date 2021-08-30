@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import productJson from "../soyTuMarket.json";
-import { getFirestore } from "../api/fireBaseService";
-import { ProductionQuantityLimitsRounded } from "@material-ui/icons";
+import { getFirestore } from "../../api/fireBaseService";
 import Spinner from "react-bootstrap/Spinner";
 
 const ItemDetailContainer = () => {

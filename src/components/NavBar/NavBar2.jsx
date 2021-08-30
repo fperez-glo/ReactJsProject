@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import CartWidget from "./CartWidget";
-import pageLogo from "../images/logo.svg";
+import CartWidget from "../Cart/CartWidget";
+import pageLogo from "../../images/logo.svg";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -20,7 +20,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
-import { getFirestore } from "../api/fireBaseService";
+import { getFirestore } from "../../api/fireBaseService";
 
 const useStyles = makeStyles((theme) => ({
   grow: {

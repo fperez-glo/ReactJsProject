@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../images/cartLogo.svg";
-import { useContextsCart } from "../context/ContextsCart";
+
+import { useContextsCart } from "../../context/ContextsCart";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from '@material-ui/core/Badge';
 

@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import { useContextsCart } from "../context/ContextsCart";
+import { useContextsCart } from "../../context/ContextsCart";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { ClosedCaptionDisabledOutlined } from "@material-ui/icons";
-import ItemCounter from "./ItemCounter";
+import ItemCounter from "../ItemsCards/ItemCounter";
 
 const useStyles = makeStyles({
   root: {

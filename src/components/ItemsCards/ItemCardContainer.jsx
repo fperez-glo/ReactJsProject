@@ -4,8 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import ItemCountCard from "./ItemCountCard";
 import { useParams } from "react-router-dom";
-import productJson from "../soyTuMarket.json";
-import { getFirestore } from "../api/fireBaseService";
+import productJson from "../../soyTuMarket.json";
+import { getFirestore } from "../../api/fireBaseService";
 import Spinner from "react-bootstrap/Spinner";
 
 const ItemCardContainer = () => {

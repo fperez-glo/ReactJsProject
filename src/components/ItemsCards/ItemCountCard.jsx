@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import showAlert from "./Alerts/AlertHelper"
-import es from "../idiom/es"
+import showAlert from "../Alerts/AlertHelper"
+import es from "../../idiom/es"
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import clsx from 'clsx';
@@ -16,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 //import { IconButton, Card } from "react-bootstrap";
 import ItemCounter from "./ItemCounter";
 import { Link, useParams } from "react-router-dom";
-import { useContextsCart } from "../context/ContextsCart";
+import { useContextsCart } from "../../context/ContextsCart";
 
 const useStyles = makeStyles({
   root: {

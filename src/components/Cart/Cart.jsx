@@ -188,7 +188,7 @@ const Cart = () => {
         </>
       ) : (
         <>
-          <h1>No hay elementos en el carrito.</h1>
+          <h1>No hay productos en el carrito.</h1>
         </>
       )}
     </>

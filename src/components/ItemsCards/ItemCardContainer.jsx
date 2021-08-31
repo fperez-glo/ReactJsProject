@@ -46,7 +46,7 @@ const ItemCardContainer = () => {
     const fetchFilterItems = async(categoryId) =>{
       const filterItems = await dbQuery.collection("producto").where('categoryId','==',categoryId).get();
       setItems(filterItems.docs)
-    }
+    };
 
     if (categoryId) {
       await fetchFilterItems(categoryId);
@@ -55,7 +55,7 @@ const ItemCardContainer = () => {
     }
     setLoading(false);
   };
-
+  console.log('items:', items);
   return (
     <>
       <div className={classes.root}>
@@ -64,7 +64,7 @@ const ItemCardContainer = () => {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         ) : (
-          
+          ( items.length ?
           // TODO: Agregar en caso de que items sea vacio un texto que indique no hay items para mostrar. (esto es por si hay alguna categoria sin items disponibles).
           <Grid container spacing={3}>
             {items.map((el) => (
@@ -80,7 +80,7 @@ const ItemCardContainer = () => {
               </Grid>
             ))}
           </Grid>
-        )}
+        : <h1>No hay productos disponibles</h1>))}
       </div>
     </>
   );

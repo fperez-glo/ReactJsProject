@@ -14,7 +14,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -89,8 +89,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   link: {
-    color:'#ffff',
-    textDecoration:'none',
+    color: "#ffff",
+    textDecoration: "none",
   },
 }));
 
@@ -134,7 +134,7 @@ const NavBar2 = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [catalogAnchorEl, setCatalogAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([]);
 
   const isAccountMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -142,14 +142,12 @@ const NavBar2 = () => {
 
   useEffect(() => {
     const fetchDBCategories = async () => {
-      const categoriesData = await db.collection('categories').get();
+      const categoriesData = await db.collection("categories").get();
       setCategories(categoriesData.docs);
     };
-    
-    fetchDBCategories();
 
+    fetchDBCategories();
   }, []);
-  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -201,12 +199,13 @@ const NavBar2 = () => {
       onClose={handleMenuClose}
     >
       {categories.map((item) => (
-        <MenuItem onClick={handleMenuClose}
-                  key={item.data().categoryId}>
-         <Link style={{ textDecoration: "none", color: "black" }}
-                to={`/category/${item.data().categoryId}`}>
-          {item.data().descripcion}
-         </Link>
+        <MenuItem onClick={handleMenuClose} key={item.data().categoryId}>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to={`/category/${item.data().categoryId}`}
+          >
+            {item.data().descripcion}
+          </Link>
         </MenuItem>
       ))}
     </Menu>
@@ -223,18 +222,22 @@ const NavBar2 = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <Link to="/cart" style={{color:'black', textDecoration:'none'}} onClick={() => handleChange({valueOnLinkedTab: null})}>
+      <Link
+        to="/cart"
+        style={{ color: "black", textDecoration: "none" }}
+        onClick={() => handleChange({ valueOnLinkedTab: null })}
+      >
         <MenuItem onClick={handleMobileMenuClose}>
-            <IconButton color="inherit" >    
-              <CartWidget/>
-            </IconButton>
+          <IconButton color="inherit">
+            <CartWidget />
+          </IconButton>
           <p>Carrito</p>
         </MenuItem>
       </Link>
       <MenuItem onClick={handleMobileMenuClose}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <FavoriteIcon/>
+            <FavoriteIcon />
           </Badge>
         </IconButton>
         <p>Favoritos</p>
@@ -253,10 +256,14 @@ const NavBar2 = () => {
     </Menu>
   );
 
+  const handleItemBrowser = (event) => {
+    console.log('valor:', event.target.value);
+  };
+
   //APARTADO DE LAS TABS
   const [value, setValue] = useState(0);
 
-  const handleChange = ({valueOnLinkedTab}, newValue) => {
+  const handleChange = ({ valueOnLinkedTab }, newValue) => {
     setValue(newValue ?? valueOnLinkedTab);
   };
 
@@ -273,7 +280,7 @@ const NavBar2 = () => {
             <MenuIcon />
           </IconButton>
           <Link to="/">
-            <img src={pageLogo} alt="" width="45" height="35" ></img>
+            <img src={pageLogo} alt="" width="45" height="35"></img>
           </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -286,6 +293,7 @@ const NavBar2 = () => {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              onChange={handleItemBrowser}
             />
           </div>
           <div className={classes.tabs}>
@@ -295,8 +303,12 @@ const NavBar2 = () => {
                 onChange={handleChange}
                 aria-label="simple tabs example"
               >
-                <Link to='/' style={{color:'white', textDecoration:'none'}}>
-                  <Tab label="Home" {...a11yProps(0)} onClick={() => handleChange({valueOnLinkedTab: 0})}/>
+                <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+                  <Tab
+                    label="Home"
+                    {...a11yProps(0)}
+                    onClick={() => handleChange({ valueOnLinkedTab: 0 })}
+                  />
                 </Link>
                 <Tab
                   label="Catalogo"
@@ -312,13 +324,17 @@ const NavBar2 = () => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton color="inherit">
-              <Link to="/cart" style={{color:'white', textDecoration:'none'}} onClick={() => handleChange({valueOnLinkedTab: null})}>
-                <CartWidget/>
+              <Link
+                to="/cart"
+                style={{ color: "white", textDecoration: "none" }}
+                onClick={() => handleChange({ valueOnLinkedTab: null })}
+              >
+                <CartWidget />
               </Link>
             </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={3} color="secondary">
-                <FavoriteIcon/>
+                <FavoriteIcon />
               </Badge>
             </IconButton>
             <IconButton

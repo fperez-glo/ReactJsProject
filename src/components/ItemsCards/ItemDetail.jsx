@@ -1,12 +1,12 @@
 import React from "react";
 import ItemCounter from "./ItemCounter";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const ItemDetail = ({
   price = 99999,
   srcImg,
   prodTitle = "prodTitle",
-  stock,
+  stock, // TODO: Nunca se implemento el control de stock.
   description,
 }) => {
   const styles = {

@@ -1,6 +1,5 @@
 import firebase from "firebase"
 import 'firebase/firestore'
-import * as dotenv from 'dotenv'
 
 var firebaseConfig = {
     // apiKey: process.env.API_KEY,

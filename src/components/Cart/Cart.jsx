@@ -3,16 +3,11 @@ import showAlert from "../Alerts/AlertHelper";
 import es from "../../idiom/es";
 import { useContextsCart } from "../../context/ContextsCart";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CartCard from "./CartCard";
 import { getFirestore } from "../../api/fireBaseService";
-import {
-  CircleNotificationsTwoTone,
-  PublishedWithChangesRounded,
-} from "@material-ui/icons";
 import Spinner from "react-bootstrap/Spinner";
 
 const useStyles = makeStyles((theme) => ({

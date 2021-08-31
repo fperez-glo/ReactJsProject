@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
 import showAlert from "../Alerts/AlertHelper"
 import es from "../../idiom/es"
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import clsx from 'clsx';
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,9 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteIcon from '@material-ui/icons/FavoriteBorderRounded';
 import ShareIcon from '@material-ui/icons/Share';
-//import { IconButton, Card } from "react-bootstrap";
-import ItemCounter from "./ItemCounter";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContextsCart } from "../../context/ContextsCart";
 
 const useStyles = makeStyles({
@@ -42,7 +38,7 @@ const ItemCountCard = ({
 
   const route = `/detail/${prodId}`;
   
-  const { cartItems, setCartItems, prodSet, setProd } = useContextsCart();
+  const { cartItems, setCartItems, setProd } = useContextsCart();
 
   const setSelectedProd = () => {
     setProd({
@@ -70,7 +66,6 @@ const ItemCountCard = ({
     //Valido si el item que quiero ingresar al carro ya existe.
     if (!findItem) {
       setCartItems([...cartItems, productSelected]);
-      //showAlert.success(es.productSuccess)
     } else {
       showAlert.info(es.productInCart)
       return;

@@ -46,16 +46,10 @@ const CartCard = ({
   const { cartItems, setCartItems } = useContextsCart();
   const classes = useStyles();
   const [pricePerProduct, setPricePerProduct] = useState(1);
-  const bull = <span className={classes.bullet}>•</span>;
 
   useEffect(() => {
-    initialLoad();
-  }, [addedQuantity]);
-
-  const initialLoad = () => {
     setPricePerProduct(addedQuantity * price);
-    //setTotalPrice(cartItems.reduce(el => el.price*el.addedQuantity));
-  };
+  }, [addedQuantity]);
 
   const deleteCartItem = (id) => {
     const index = cartItems.findIndex((el) => el.prodId === id);

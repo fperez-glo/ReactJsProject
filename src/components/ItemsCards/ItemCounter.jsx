@@ -1,10 +1,9 @@
-import { useState, useEffect, View } from "react";
+import { useState, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useContextsCart } from "../../context/ContextsCart";
 import showAlert from "../Alerts/AlertHelper";
 import es from "../../idiom/es";
-//import CartContext from "../context/CartContext";
 
 const ItemCounter = ({
   enableAddCartButton = true,

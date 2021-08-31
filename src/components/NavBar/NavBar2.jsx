@@ -129,7 +129,7 @@ function a11yProps(index) {
 }
 
 const NavBar2 = () => {
-  const db = getFirestore();
+  
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [catalogAnchorEl, setCatalogAnchorEl] = useState(null);
@@ -141,6 +141,7 @@ const NavBar2 = () => {
   const isCatalogMenuOpen = Boolean(catalogAnchorEl);
 
   useEffect(() => {
+    const db = getFirestore();
     const fetchDBCategories = async () => {
       const categoriesData = await db.collection("categories").get();
       setCategories(categoriesData.docs);
@@ -257,7 +258,7 @@ const NavBar2 = () => {
   );
 
   const handleItemBrowser = (event) => {
-    console.log('valor:', event.target.value);
+    //console.log('valor:', event.target.value);
   };
 
   //APARTADO DE LAS TABS

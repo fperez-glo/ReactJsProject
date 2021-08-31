@@ -4,11 +4,7 @@ import { useContextsCart } from "../../context/ContextsCart";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from '@material-ui/core/Badge';
 
-const CartWidget = (
-  {
-    /*Props que recibe el componente*/
-  }
-) => {
+const CartWidget = () => {
   const { cartItems } = useContextsCart();
   
   return (

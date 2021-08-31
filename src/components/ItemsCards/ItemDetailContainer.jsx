@@ -5,14 +5,20 @@ import { getFirestore } from "../../api/fireBaseService";
 import Spinner from "react-bootstrap/Spinner";
 
 const ItemDetailContainer = () => {
-  const dbQuery = getFirestore();
+  
   const [ items, setItems ] = useState([]);
   const [loading, setLoading] = useState(true);
   const { prodId } = useParams();
 
   useEffect(()=>{
-    
+    const dbQuery = getFirestore();
     if ( prodId ) {
+      const fetchFilterItems = async (prodId) =>{
+        const filterItems = await dbQuery.collection("producto").doc(prodId).get();
+        setItems(filterItems.data());
+        setLoading(false);
+      }
+      
       fetchFilterItems(prodId);
     } else
     {
@@ -21,11 +27,7 @@ const ItemDetailContainer = () => {
     
   },[prodId])
 
-  const fetchFilterItems = async (prodId) =>{
-    const filterItems = await dbQuery.collection("producto").doc(prodId).get();
-    setItems(filterItems.data());
-    setLoading(false);
-  }
+
 
   return (
     <>

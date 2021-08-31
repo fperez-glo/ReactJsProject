@@ -42,13 +42,13 @@ $ npm run test
 ## Build with 🛠️
 
 * [Bootstrap](https://react-bootstrap.github.io/) - Styles Library.
-  - Used to style some components
+  - Used to style some components like Buttons in some screens
 * [ReactRouter](https://reactrouter.com/web/guides/quick-start) - React Navigation Component.
   - Integration to manage routes in e-commerce
 * [MaterialUI](https://material-ui.com/es/getting-started/installation/) - Material UI Desing.
-  - Used to style some components
+  - Used to style some components like Icons and NavBar
 * [SweetAlerts](https://sweetalert2.github.io/) - Sweet Alert.
-  - Used to give messages to the user.
+  - Used to give UI messages
 * [FireBase](https://firebase.google.com/) - FireBase.
   - Integration to manage data storage
 
